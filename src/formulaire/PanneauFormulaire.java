@@ -15,44 +15,41 @@ public class PanneauFormulaire extends JPanel{
 	public PanneauFormulaire() {
 		labelMatricule = new JLabel("Matricule : ");
 		labelMatricule.setHorizontalAlignment(SwingConstants.RIGHT);
-		//cont.add(labelMatricule);
-		zoneTexteMatricule = new JTextField(30);
+		zoneTexteMatricule = new JTextField(20);
 		//zoneTexteMatricule.setPreferredSize(new Dimension(100,12));
-		zoneTexteMatricule.setSize(200,24);
-		//cont.add(zoneTexteMatricule);
-		labelPrenom = new  JLabel("Pr�nom : ");
+		//zoneTexteMatricule.setSize(200,24);
+
+		labelPrenom = new  JLabel("Prénom : ");
 		labelPrenom.setHorizontalAlignment(SwingConstants.RIGHT);
-		//cont.add(labelPrenom);
-		zoneTextePrenom = new JTextField(30);
-		//cont.add(zoneTextePrenom);
+		zoneTextePrenom = new JTextField(20);
+
 		labelNom = new  JLabel("Nom : ");
 		labelNom.setHorizontalAlignment(SwingConstants.RIGHT);
-		//cont.add(labelNom);
-		zoneTexteNom = new JTextField(30);
-		//cont.add(zoneTexteNom);
+		zoneTexteNom = new JTextField(20);
+
 		labelNaissance = new  JLabel("Date de naissance : ");
 		labelNaissance.setHorizontalAlignment(SwingConstants.RIGHT);
-		//cont.add(labelNaissance);
-		zoneTexteNaissance = new JTextField(30);
-		//cont.add(labelSection);
+		zoneTexteNaissance = new JTextField(20);
+		
 		labelSection = new  JLabel("Section : ");
 		labelSection.setHorizontalAlignment(SwingConstants.RIGHT);
-		zoneTexteSection = new JTextField(30);
+		zoneTexteSection = new JTextField(20);
+		zoneTexteSection.setEditable(false);
 		
 		boxBoursier = new JCheckBox("Boursier");
 		boxBoursier.setHorizontalAlignment(SwingConstants.RIGHT);
 		boxEtranger = new JCheckBox("Etranger");
 		
-		buttonNetu = new JRadioButton("Nouvel �tudiant", true);
+		buttonNetu = new JRadioButton("Nouvel étudiant", true);
 		buttonNetu.setHorizontalAlignment(SwingConstants.RIGHT);
-		buttonReinsc = new JRadioButton("R�inscription", false);
+		buttonReinsc = new JRadioButton("Réinscription", false);
 		groupBout = new ButtonGroup();
 		groupBout.add(buttonNetu);
 		groupBout.add(buttonReinsc);
 		
 		labelOrigine = new JLabel("Origine : ");
 		labelOrigine.setHorizontalAlignment(SwingConstants.RIGHT);
-		String[] continent = {"Europe", "Afrique", "Asie", "Am�rique", "Oc�anie"};
+		String[] continent = {"Europe", "Afrique", "Asie", "Amérique", "Océanie"};
 		origine = new JComboBox(continent);
 		origine.setSelectedItem("Europe");
 		
@@ -71,9 +68,48 @@ public class PanneauFormulaire extends JPanel{
 		add(labelOrigine);
 		add(origine);
 		
+		GestActionSection g = new GestActionSection();
+		zoneTexteMatricule.addActionListener(g);
+	}
+
+	private class GestActionSection implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			int i = Integer.parseInt(zoneTexteMatricule.getText());
+			switch (i / 1000) {
+				case 1:
+					zoneTexteSection.setText("Technologie de l'informatique");
+					break;
+				case 2:
+					zoneTexteSection.setText("Sécurité des systèmes");
+					break;
+				case 3:
+					zoneTexteSection.setText("Informatiques de gestion");
+					break;
+				case 4:
+					zoneTexteSection.setText("Marketing");
+					break;
+				case 5:
+					zoneTexteSection.setText("Automatique");
+					break;
+				case 6:
+					zoneTexteSection.setText("Droit");
+					break;
+				case 7:
+					zoneTexteSection.setText("Comptabilité");
+					break;
+				case 8:
+					zoneTexteSection.setText("Régendat");
+					break;
+				default:
+					JOptionPane.showMessageDialog(null, "Érreur de matricule", "Érreur", JOptionPane.WARNING_MESSAGE);
+					break;
+			}
+		}
 	}
 
 }
+
+
 
 
 
