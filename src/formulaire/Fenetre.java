@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class Fenetre extends JFrame{
+	private static final long serialVersionUID = 1L;
 	private Container cont;
 	private PanneauFormulaire panneau;
 	//private JLabel label;

@@ -1,11 +1,10 @@
 package formulaire;
-import java.awt.*;
+
 import java.awt.event.*;
 import javax.swing.*;
 
 public class PanneauFormulaire extends JPanel{
-	//private Container cont;
-	private JLabel labelMatricule, labelPrenom, labelNom, labelNaissance, labelSection, labelOrigine, labelNetu, labelReinsc;
+	private JLabel labelMatricule, labelPrenom, labelNom, labelNaissance, labelSection, labelOrigine;
 	private JTextField zoneTexteMatricule, zoneTextePrenom, zoneTexteNom, zoneTexteNaissance, zoneTexteSection;
 	private JCheckBox boxBoursier, boxEtranger;
 	private JRadioButton buttonNetu, buttonReinsc;
@@ -43,6 +42,7 @@ public class PanneauFormulaire extends JPanel{
 		buttonNetu = new JRadioButton("Nouvel étudiant", true);
 		buttonNetu.setHorizontalAlignment(SwingConstants.RIGHT);
 		buttonReinsc = new JRadioButton("Réinscription", false);
+
 		groupBout = new ButtonGroup();
 		groupBout.add(buttonNetu);
 		groupBout.add(buttonReinsc);
@@ -52,11 +52,15 @@ public class PanneauFormulaire extends JPanel{
 		String[] continent = {"Europe", "Afrique", "Asie", "Amérique", "Océanie"};
 		origine = new JComboBox(continent);
 		origine.setSelectedItem("Europe");
+		labelOrigine.setVisible(false);
+		origine.setVisible(false);
 		
 		add(labelMatricule);
 		add(zoneTexteMatricule);
 		add(labelNom);
 		add(zoneTexteNom);
+		add(labelPrenom);
+		add(zoneTextePrenom);
 		add(labelNaissance);
 		add(zoneTexteNaissance);
 		add(labelSection);
@@ -68,8 +72,11 @@ public class PanneauFormulaire extends JPanel{
 		add(labelOrigine);
 		add(origine);
 		
-		GestActionSection g = new GestActionSection();
-		zoneTexteMatricule.addActionListener(g);
+		
+		GestActionSection actionSection = new GestActionSection();
+		zoneTexteMatricule.addActionListener(actionSection);
+		GestActionOrigine actionOrigine = new GestActionOrigine();
+		boxEtranger.addItemListener(actionOrigine);
 	}
 
 	private class GestActionSection implements ActionListener{
@@ -103,6 +110,18 @@ public class PanneauFormulaire extends JPanel{
 				default:
 					JOptionPane.showMessageDialog(null, "Érreur de matricule", "Érreur", JOptionPane.WARNING_MESSAGE);
 					break;
+			}
+		}
+	}
+
+	private class GestActionOrigine implements ItemListener{
+		public void itemStateChanged(ItemEvent e){
+			if(e.getStateChange() == ItemEvent.DESELECTED){
+				labelOrigine.setVisible(false);
+				origine.setVisible(false);
+			}else{
+				labelOrigine.setVisible(true);
+				origine.setVisible(true);
 			}
 		}
 	}
