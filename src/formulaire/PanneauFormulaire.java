@@ -4,12 +4,13 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class PanneauFormulaire extends JPanel{
+	private static final long serialVersionUID = 1L;
 	private JLabel labelMatricule, labelPrenom, labelNom, labelNaissance, labelSection, labelOrigine;
 	private JTextField zoneTexteMatricule, zoneTextePrenom, zoneTexteNom, zoneTexteNaissance, zoneTexteSection;
 	private JCheckBox boxBoursier, boxEtranger;
 	private JRadioButton buttonNetu, buttonReinsc;
 	private ButtonGroup groupBout;
-	private JComboBox origine;
+	private JComboBox<String> origine;
 	
 	public PanneauFormulaire() {
 		labelMatricule = new JLabel("Matricule : ");
@@ -50,7 +51,7 @@ public class PanneauFormulaire extends JPanel{
 		labelOrigine = new JLabel("Origine : ");
 		labelOrigine.setHorizontalAlignment(SwingConstants.RIGHT);
 		String[] continent = {"Europe", "Afrique", "Asie", "Amérique", "Océanie"};
-		origine = new JComboBox(continent);
+		origine = new JComboBox<>(continent);
 		origine.setSelectedItem("Europe");
 		labelOrigine.setVisible(false);
 		origine.setVisible(false);
@@ -127,6 +128,8 @@ public class PanneauFormulaire extends JPanel{
 	}
 
 }
+
+
 
 
 
