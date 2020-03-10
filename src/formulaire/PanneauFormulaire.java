@@ -40,7 +40,7 @@ public class PanneauFormulaire extends JPanel{
 		boxBoursier.setHorizontalAlignment(SwingConstants.RIGHT);
 		boxEtranger = new JCheckBox("Etranger");
 		
-		buttonNetu = new JRadioButton("Nouvel étudiant", true);
+		buttonNetu = new JRadioButton("Nouvel étudiant", false);
 		buttonNetu.setHorizontalAlignment(SwingConstants.RIGHT);
 		buttonReinsc = new JRadioButton("Réinscription", false);
 
@@ -78,6 +78,10 @@ public class PanneauFormulaire extends JPanel{
 		zoneTexteMatricule.addActionListener(actionSection);
 		GestActionOrigine actionOrigine = new GestActionOrigine();
 		boxEtranger.addItemListener(actionOrigine);
+		GestActionRadio actionRadio = new GestActionRadio();
+		buttonNetu.addItemListener(actionRadio);
+		buttonReinsc.addItemListener(actionRadio);
+
 	}
 
 	private class GestActionSection implements ActionListener{
@@ -125,6 +129,17 @@ public class PanneauFormulaire extends JPanel{
 				origine.setVisible(true);
 			}
 		}
+	}
+	
+	private class GestActionRadio implements ItemListener{
+		public void itemStateChanged(ItemEvent e){
+			if(e.getSource() == buttonNetu && e.getStateChange() == ItemEvent.SELECTED){
+				JOptionPane.showMessageDialog(null, "Rendez-vous au secrétariat");
+			}else if(e.getSource() == buttonReinsc && e.getStateChange() == ItemEvent.SELECTED){
+				JOptionPane.showMessageDialog(null, "N'oubliez pas de rendre au secréteriat la liste des dispenses demandées");
+			}
+		}
+		
 	}
 
 }
